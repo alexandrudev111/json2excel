@@ -12,7 +12,7 @@ class App extends Component {
   s2ab(s){
     var buf = new ArrayBuffer(s.length);
     var view = new Uint8Array(buf);
-    for(var i = 0 ; i < s.length ; i++) view[i] = s. charCodeAt(i) & 0xFF;
+    for(var i = 0 ; i < s.length ; i++) view[i] = s.charCodeAt(i) & 0xFF;
     return buf;
   }
   convert = () => {
@@ -25,11 +25,14 @@ class App extends Component {
     };
     wb.SheetNames.push('New Sheet');
     var ws = XLSX.utils.json_to_sheet([
-      { Student: "Euan", Subject: "" },
-      { Student: "Mary", Subject: "" },
-      { Student: "Holly", Subject: "" },
-    ], {header:["Student","Subject"]});
-
+      { Student: "Euan"},
+      { Student: "Mary"},
+      { Student: "Holly"},
+    ], {header:["Student","Subject", "Grade"]});
+    ws['!dataValidation'] =  [
+      {sqref: 'B2:B99', type: 'list', values: ['Maths', 'English', 'History', 'Geography', 'Art', 'Science', 'Computers', 'French']},
+      {sqref: 'C2:C99', type: 'decimal', operator: 'between', min:1, max: 10},
+    ];
 
     wb.Sheets['New Sheet'] = ws;
 
