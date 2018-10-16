@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import XLSX from 'xlsx';
+import XLSX from 'data-validation-xlsx';
 import saveAs from 'file-saver';
 
 
@@ -42,6 +42,7 @@ class App extends Component {
     ws['!cols'] = [{wch:16},{wch:16},{wch:16},{wch:16},{wch:16},{wch:16},{wch:16}]
     for(let i=0;i<97;i++){
       ws['F'+(2+i)] = {v:'', z: 'mm/dd/yyyy'};
+      ws['E'+(2+i)] = {v:'', z: '@'};
     }
     ws['!ref']="A1:G99";
 
